@@ -10,6 +10,11 @@ const createFields = ['title', 'amount', 'category', 'type'];
 const updateFields = ['title', 'amount', 'category', 'type'];
 
 router.get('/', requireUser, asyncHandler(transactionController.listTransactions));
+router.get(
+    '/summary',
+    requireUser,
+    asyncHandler(transactionController.getTransactionSummary)
+);
 router.get('/:id', asyncHandler(transactionController.getTransaction));
 router.post('/', requireUser, validateBody(createFields), asyncHandler(transactionController.createTransaction));
 router.patch('/:id', requireUser, validateBody(updateFields), asyncHandler(transactionController.updateTransaction));

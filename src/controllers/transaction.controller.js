@@ -50,10 +50,26 @@ async function deleteTransaction(req, res) {
   });
 }
 
+
+async function getTransactionSummary(req, res) {
+  const summary =
+    await transactionService.getSummaryForUser(
+      req.authUser._id
+    );
+
+  return res.status(200).json({
+    success: true,
+    message: 'Transaction summary retrieved successfully.',
+    data: summary
+  });
+}
+
+
 module.exports = {
   listTransactions,
   getTransaction,
   createTransaction,
   updateTransaction,
-  deleteTransaction
+  deleteTransaction,
+  getTransactionSummary
 };

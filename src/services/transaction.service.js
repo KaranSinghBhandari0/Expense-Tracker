@@ -54,4 +54,18 @@ async function deleteForUser(id, userId) {
   return transaction;
 }
 
-module.exports = { listForUser, getById, createForUser, updateForUser, deleteForUser };
+
+async function getSummaryForUser(userId) {
+  const summary =
+    await transactionRepository.getSummaryForUser(userId);
+
+  return {
+    totalExpense: summary.totalExpense,
+    totalIncome: summary.totalIncome,
+    totalSavings:
+      summary.totalIncome - summary.totalExpense
+  };
+}
+
+
+module.exports = { listForUser, getById, createForUser, updateForUser, deleteForUser, getSummaryForUser };

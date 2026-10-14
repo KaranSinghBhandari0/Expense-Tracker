@@ -34,6 +34,7 @@ Do not commit `.env` or share your admin token.
 This starter follows the requested simple header-based protection:
 
 - **Create user:** `Authorization: Bearer <ADMIN_TOKEN>` where the token must match `ADMIN_TOKEN` in `.env`.
+- **List users:** `Authorization: Bearer <ADMIN_TOKEN>` using the same admin token.
 - **Protected transaction list/create/update/delete/summary:** `x-user-id: <existing MongoDB user ID>`.
 - User ID header authentication is suitable for a learning/demo project, but **it is not secure authentication for a public production API**: anyone who obtains or guesses an ID can impersonate that user. For production, replace it with real authentication (e.g. signed JWTs tied to a user) and authorization checks.
 
@@ -45,6 +46,7 @@ The transaction list is scoped to the user identified by `x-user-id`. Create/upd
 |---|---|---|---|
 | GET | `/health` | Public | Health check |
 | POST | `/api/users` | Admin bearer token | Create a user |
+| GET | `/api/users` | Admin bearer token | List all users |
 | GET | `/api/users/:id` | Public | Get user details |
 | GET | `/api/transactions?limit=10` | `x-user-id` | List the current user's transactions; no limit returns all |
 | GET | `/api/transactions/summary` | `x-user-id` | Get total expenses, total income, and net savings |

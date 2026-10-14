@@ -5,6 +5,10 @@ async function createUser(data) {
   return userRepository.create({ name: data.name.trim() });
 }
 
+async function getUsers() {
+  return userRepository.findAll();
+}
+
 async function getUserById(id) {
   if (!isValidObjectId(id)) {
     const error = new Error('Invalid user ID.');
@@ -21,4 +25,4 @@ async function getUserById(id) {
   return user;
 }
 
-module.exports = { createUser, getUserById };
+module.exports = { createUser, getUsers, getUserById };

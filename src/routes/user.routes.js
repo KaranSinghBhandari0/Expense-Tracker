@@ -7,6 +7,7 @@ const userController = require('../controllers/user.controller');
 const router = express.Router();
 
 router.post('/', requireAdminToken, validateBody(['name']), asyncHandler(userController.createUser));
+router.get('/', requireAdminToken, asyncHandler(userController.getUsers));
 router.get('/:id', asyncHandler(userController.getUser));
 
 module.exports = router;

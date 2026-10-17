@@ -23,7 +23,11 @@ function validateLimit(rawLimit) {
 
 async function listForUser(userId, rawLimit) {
   const limit = validateLimit(rawLimit);
-  return transactionRepository.findAllForUser(userId, limit);
+  const [transactions, count] = await Promise.all([
+    transactionRepository.findAllForUser(userId, limit),
+    transactionRepository.countForUser(userId)
+  ]);
+  return { transactions, count };
 }
 
 async function getById(id) {

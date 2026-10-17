@@ -14,6 +14,10 @@ function findAllForUser(userId, limit) {
   return query;
 }
 
+function countForUser(userId) {
+  return Transaction.countDocuments({ userId });
+}
+
 function updateById(id, userId, changes) {
   return Transaction.findOneAndUpdate(
     { _id: id, userId },
@@ -72,4 +76,4 @@ async function getSummaryForUser(userId) {
   };
 }
 
-module.exports = { create, findById, findAllForUser, updateById, deleteById, getSummaryForUser };
+module.exports = { create, findById, findAllForUser, countForUser, updateById, deleteById, getSummaryForUser };

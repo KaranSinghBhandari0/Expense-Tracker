@@ -1,12 +1,15 @@
 const transactionService = require('../services/transaction.service');
 
 async function listTransactions(req, res) {
-  const transactions = await transactionService.listForUser(req.authUser._id, req.query.limit);
+  const { transactions, count } = await transactionService.listForUser(
+    req.authUser._id,
+    req.query.limit
+  );
   return res.status(200).json({
     success: true,
     message: 'Transactions retrieved successfully.',
     data: transactions,
-    meta: { count: transactions.length }
+    meta: { count }
   });
 }
 
